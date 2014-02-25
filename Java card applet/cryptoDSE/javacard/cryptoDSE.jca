@@ -1,0 +1,2819 @@
+// converted by version 1.3
+// on Wed Sep 04 09:36:14 GMT 2013
+
+.package cryptoDSE {
+	.aid 0x1:0x2:0x3:0x4:0x9:0x0;
+	.version 1.0;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.3;		//javacard/framework
+		0xA0:0x0:0x0:0x0:0x62:0x2:0x1 1.3;		//javacardx/crypto
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x2 1.3;		//javacard/security
+		0xA0:0x0:0x0:0x0:0x62:0x0:0x1 1.0;		//java/lang
+	}
+
+	.applet {
+		0x1:0x2:0x3:0x4:0x9 CryptoDSE;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef byte CryptoDSE/stateAuditing;
+		// 1
+		instanceFieldRef byte CryptoDSE/stateEncryption;
+		// 2
+		instanceFieldRef byte CryptoDSE/stateDecryption;
+		// 3
+		instanceFieldRef 2.16 CryptoDSE/kp;
+		// 4
+		instanceFieldRef 2.19 CryptoDSE/cardPublicKey;
+		// 5
+		instanceFieldRef 2.18 CryptoDSE/cardPrivateKey;
+		// 6
+		instanceFieldRef 2.22 CryptoDSE/ka;
+		// 7
+		instanceFieldRef ListInstances CryptoDSE/li;
+		// 8
+		instanceFieldRef 2.20 CryptoDSE/desKey;
+		// 9
+		instanceFieldRef byte[] CryptoDSE/h;
+		// 10
+		instanceFieldRef byte[] CryptoDSE/encKey;
+		// 11
+		instanceFieldRef byte[] CryptoDSE/macH;
+		// 12
+		instanceFieldRef byte[] CryptoDSE/hashEncKey;
+		// 13
+		instanceFieldRef 1.1 CryptoDSE/cipher;
+		// 14
+		instanceFieldRef 2.15 CryptoDSE/macSig;
+		// 15
+		instanceFieldRef 2.20 CryptoDSE/macKey;
+		// 16
+		instanceFieldRef 2.15 CryptoDSE/sig;
+		// 17
+		instanceFieldRef 2.14 CryptoDSE/rd;
+		// 18
+		instanceFieldRef byte[] CryptoDSE/iv;
+		// 19
+		instanceFieldRef byte[] CryptoDSE/temporaryData;
+		// 20
+		instanceFieldRef byte[] CryptoDSE/publicData;
+		// 21
+		instanceFieldRef byte[] CryptoDSE/macData;
+		// 22
+		instanceFieldRef byte[] CryptoDSE/qn;
+		// 23
+		instanceFieldRef byte[] CryptoDSE/g;
+		// 24
+		instanceFieldRef byte[] CryptoDSE/c;
+		// 25
+		instanceFieldRef byte[] CryptoDSE/dc;
+		// 26
+		instanceFieldRef byte[] CryptoDSE/s;
+		// 27
+		instanceFieldRef byte[] CryptoDSE/gs;
+		// 28
+		instanceFieldRef byte[] CryptoDSE/modN;
+		// 29
+		instanceFieldRef byte[] CryptoDSE/t;
+		// 30
+		instanceFieldRef byte[] CryptoDSE/secret;
+		// 31
+		instanceFieldRef byte[] CryptoDSE/decryptedData;
+		// 32
+		instanceFieldRef 2.11 CryptoDSE/md;
+		// 33
+		instanceFieldRef byte[] CryptoDSE/sumResult;
+		// 34
+		instanceFieldRef byte[] CryptoDSE/sumModResult;
+		// 35
+		instanceFieldRef byte[] CryptoDSE/multiplyModResult;
+		// 36
+		instanceFieldRef byte[] CryptoDSE/one;
+		// 37
+		instanceFieldRef byte[] CryptoDSE/shift;
+		// 38
+		instanceFieldRef byte[] CryptoDSE/modulus;
+		// 39
+		instanceFieldRef byte[] CryptoDSE/minusModulus;
+		// 40
+		instanceFieldRef byte[] CryptoDSE/shortArray;
+		// 41
+		instanceFieldRef 2.19 CryptoDSE/auditPublicKey;
+		// 42
+		instanceFieldRef 2.18 CryptoDSE/auditPrivateKey;
+		// 43
+		instanceFieldRef short CryptoDSE/sizeAuditPrivateKey;
+		// 44
+		instanceFieldRef short CryptoDSE/sizeAuditPublicKey;
+		// 45
+		instanceFieldRef short CryptoDSE/sizeModulus;
+		// 46
+		instanceFieldRef 2.19 CryptoDSE/ephemeralPublicKey;
+		// 47
+		instanceFieldRef short CryptoDSE/macDataLen;
+		// 48
+		instanceFieldRef short CryptoDSE/sizeDecryptedData;
+		// 49
+		instanceFieldRef short CryptoDSE/decryptedBytesReturned;
+		// 50
+		instanceFieldRef 2.19 InstanceKeys/pubKey;
+		// 51
+		instanceFieldRef 2.18 InstanceKeys/privKey;
+		// 52
+		instanceFieldRef short InstanceKeys/id;
+		// 53
+		instanceFieldRef byte[] ListInstances/available;
+		// 54
+		instanceFieldRef InstanceKeys[] ListInstances/clients;
+		// 55
+		classRef 2.20;		// javacard/security/AESKey
+		// 56
+		virtualMethodRef 2.16.3()Ljavacard/security/PublicKey;;		// getPublic()Ljavacard/security/PublicKey;
+			.descriptor	Ljavacard/security/PublicKey;	2.3;
+
+		// 57
+		staticMethodRef 0.8.13(SB)[B;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+		// 58
+		classRef 2.19;		// javacard/security/ECPublicKey
+		// 59
+		classRef CryptoDSE;
+		// 60
+		staticMethodRef CryptoDSE/<init>()V;
+		// 61
+		virtualMethodRef 0.3.1()V;		// register()V
+		// 62
+		virtualMethodRef 0.10.1()[B;		// getBuffer()[B
+		// 63
+		staticMethodRef 0.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 64
+		staticMethodRef CryptoDSE/keyGen(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 65
+		staticMethodRef CryptoDSE/encrypt(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 66
+		staticMethodRef CryptoDSE/decrypt(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 67
+		staticMethodRef CryptoDSE/audit(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 68
+		staticMethodRef CryptoDSE/delete(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 69
+		staticMethodRef CryptoDSE/getECData(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 70
+		staticMethodRef CryptoDSE/nope(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 71
+		virtualMethodRef 0.10.6()S;		// setIncomingAndReceive()S
+		// 72
+		virtualMethodRef 0.10.7()S;		// setOutgoing()S
+		// 73
+		virtualMethodRef 0.10.9(S)V;		// setOutgoingLength(S)V
+		// 74
+		virtualMethodRef 0.10.5([BSS)V;		// sendBytesLong([BSS)V
+		// 75
+		virtualMethodRef ListInstances/isValid(S)Z;
+		// 76
+		virtualMethodRef ListInstances/removeInstance(S)V;
+		// 77
+		virtualMethodRef 2.15.3(Ljavacard/security/Key;B)V;		// init(Ljavacard/security/Key;B)V
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 78
+		virtualMethodRef 2.15.5([BSS[BS)S;		// sign([BSS[BS)S
+		// 79
+		staticMethodRef 0.16.1([BS[BSS)S;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+		// 80
+		virtualMethodRef ListInstances/getInstance(S)LcryptoDSE/InstanceKeys;;
+		// 81
+		virtualMethodRef InstanceKeys/getPrivateKey()Ljavacard/security/ECPrivateKey;;
+			.descriptor	Ljavacard/security/ECPrivateKey;	2.18;
+
+		// 82
+		virtualMethodRef 2.22.1(Ljavacard/security/PrivateKey;)V;		// init(Ljavacard/security/PrivateKey;)V
+			.descriptor	Ljavacard/security/PrivateKey;	2.2;
+
+		// 83
+		virtualMethodRef 2.22.3([BSS[BS)S;		// generateSecret([BSS[BS)S
+		// 84
+		virtualMethodRef 2.11.4()V;		// reset()V
+		// 85
+		virtualMethodRef 2.11.1([BSS[BS)S;		// doFinal([BSS[BS)S
+		// 86
+		staticMethodRef 0.16.0([BS[BSS)B;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+		// 87
+		classRef 2.16;		// javacard/security/KeyPair
+		// 88
+		virtualMethodRef 2.16.2()Ljavacard/security/PrivateKey;;		// getPrivate()Ljavacard/security/PrivateKey;
+			.descriptor	Ljavacard/security/PrivateKey;	2.2;
+
+		// 89
+		classRef 2.18;		// javacard/security/ECPrivateKey
+		// 90
+		staticMethodRef 1.1.0(BZ)Ljavacardx/crypto/Cipher;;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+			.descriptor	Ljavacardx/crypto/Cipher;	1.1;
+
+		// 91
+		virtualMethodRef 2.11.5([BSS)V;		// update([BSS)V
+		// 92
+		staticMethodRef CryptoDSE/setModulus([BS)V;
+		// 93
+		staticMethodRef CryptoDSE/multiplyModByteArrays([B[B)[B;
+		// 94
+		staticMethodRef CryptoDSE/sumModByteArrays([B[B)[B;
+		// 95
+		staticMethodRef 2.16.0(BS)V;		// javacard/security/KeyPair.<init>(BS)V
+		// 96
+		virtualMethodRef ListInstances/createInstance()S;
+		// 97
+		virtualMethodRef InstanceKeys/getPublicKey()Ljavacard/security/ECPublicKey;;
+			.descriptor	Ljavacard/security/ECPublicKey;	2.19;
+
+		// 98
+		staticMethodRef 2.15.0(BZ)Ljavacard/security/Signature;;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+			.descriptor	Ljavacard/security/Signature;	2.15;
+
+		// 99
+		virtualMethodRef 2.14.1([BSS)V;		// generateData([BSS)V
+		// 100
+		virtualMethodRef 1.1.4(Ljavacard/security/Key;B[BSS)V;		// init(Ljavacard/security/Key;B[BSS)V
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 101
+		virtualMethodRef 1.1.5([BSS[BS)S;		// update([BSS[BS)S
+		// 102
+		virtualMethodRef 2.15.6([BSS)V;		// update([BSS)V
+		// 103
+		virtualMethodRef 1.1.1([BSS[BS)S;		// doFinal([BSS[BS)S
+		// 104
+		staticMethodRef 2.22.0(BZ)Ljavacard/security/KeyAgreement;;		// javacard/security/KeyAgreement.getInstance(BZ)Ljavacard/security/KeyAgreement;
+			.descriptor	Ljavacard/security/KeyAgreement;	2.22;
+
+		// 105
+		staticMethodRef 0.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 106
+		staticMethodRef 2.11.0(BZ)Ljavacard/security/MessageDigest;;		// javacard/security/MessageDigest.getInstance(BZ)Ljavacard/security/MessageDigest;
+			.descriptor	Ljavacard/security/MessageDigest;	2.11;
+
+		// 107
+		staticMethodRef 0.16.6([BSS)S;		// javacard/framework/Util.setShort([BSS)S
+		// 108
+		staticMethodRef CryptoDSE/sumByteArrays([B[B)V;
+		// 109
+		staticMethodRef CryptoDSE/compareByteArrays([B[B)Z;
+		// 110
+		staticMethodRef 0.16.3([BSSB)S;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+		// 111
+		staticMethodRef 3.0.0()V;		// java/lang/Object.<init>()V
+		// 112
+		classRef ListInstances;
+		// 113
+		staticMethodRef 2.14.0(B)Ljavacard/security/RandomData;;		// javacard/security/RandomData.getInstance(B)Ljavacard/security/RandomData;
+			.descriptor	Ljavacard/security/RandomData;	2.14;
+
+		// 114
+		staticMethodRef ListInstances/<init>()V;
+		// 115
+		virtualMethodRef 2.16.1()V;		// genKeyPair()V
+		// 116
+		classRef InstanceKeys;
+		// 117
+		staticMethodRef 2.13.0(BSZ)Ljavacard/security/Key;;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 118
+		virtualMethodRef ListInstances/consumeNextInstance()S;
+		// 119
+		staticMethodRef InstanceKeys/<init>(S)V;
+	}
+
+	.class public CryptoDSE 0 extends 0.3 {		// extends javacard/framework/Applet
+
+		.fields {
+			 ListInstances li 0;		// LcryptoDSE/ListInstances;
+			 1.1 cipher 1;		// Ljavacardx/crypto/Cipher;
+			 2.15 sig 2;		// Ljavacard/security/Signature;
+			 2.18 cardPrivateKey 3;		// Ljavacard/security/ECPrivateKey;
+			 2.19 cardPublicKey 4;		// Ljavacard/security/ECPublicKey;
+			 2.18 auditPrivateKey 5;		// Ljavacard/security/ECPrivateKey;
+			 2.19 auditPublicKey 6;		// Ljavacard/security/ECPublicKey;
+			 2.19 ephemeralPublicKey 7;		// Ljavacard/security/ECPublicKey;
+			 2.16 kp 8;		// Ljavacard/security/KeyPair;
+			 2.22 ka 9;		// Ljavacard/security/KeyAgreement;
+			 2.20 desKey 10;		// Ljavacard/security/AESKey;
+			 2.20 macKey 11;		// Ljavacard/security/AESKey;
+			 2.15 macSig 12;		// Ljavacard/security/Signature;
+			 byte[] temporaryData 13;		// [B
+			 byte[] publicData 14;		// [B
+			 byte[] macData 15;		// [B
+			 byte[] secret 16;		// [B
+			 byte[] qn 17;		// [B
+			 byte[] g 18;		// [B
+			 byte[] gs 19;		// [B
+			 byte[] s 20;		// [B
+			 byte[] c 21;		// [B
+			 byte[] dc 22;		// [B
+			 byte[] modN 23;		// [B
+			 byte[] t 24;		// [B
+			 2.14 rd 25;		// Ljavacard/security/RandomData;
+			 byte[] iv 26;		// [B
+			 byte[] h 27;		// [B
+			 byte[] encKey 28;		// [B
+			 byte[] hashEncKey 29;		// [B
+			 byte[] macH 30;		// [B
+			 byte[] decryptedData 31;		// [B
+			 2.11 md 32;		// Ljavacard/security/MessageDigest;
+			 byte[] sumResult 33;		// [B
+			 byte[] sumModResult 34;		// [B
+			 byte[] multiplyModResult 35;		// [B
+			 byte[] one 36;		// [B
+			 byte[] shift 37;		// [B
+			 byte[] modulus 38;		// [B
+			 byte[] minusModulus 39;		// [B
+			 byte[] shortArray 40;		// [B
+			 byte stateAuditing 41;		// B
+			 byte stateEncryption 42;		// B
+			 byte stateDecryption 43;		// B
+			 short macDataLen 44;		// S
+			 short sizeEphemeralPublicKey 45;		// S
+			 short sizeSecret 46;		// S
+			 short sizeAuditPublicKey 47;		// S
+			 short sizeAuditPrivateKey 48;		// S
+			 short sizeDecryptedData 49;		// S
+			 short decryptedBytesReturned 50;		// S
+			 short sizeModulus 51;		// S
+			static final byte KEYGEN = 16;		// B
+			static final byte ENCRYPT = 32;		// B
+			static final byte DECRYPT = 48;		// B
+			static final byte AUDIT = 64;		// B
+			static final byte DELETE = 80;		// B
+			static final byte GETECDATA = 96;		// B
+			static final byte NOPE = 112;		// B
+			static final byte ALG_EC_SVDP_DH_PLAIN = 3;		// B
+			static final byte ALG_AES_CMAC8 = -109;		// B
+			static final short LENGTH_EC_FP_256 = 256;		// S
+			static final short INVALID_INSTANCE_ID = 2801;		// S
+			static final short SIGNATURE_DOES_NOT_MATCH = 2802;		// S
+			static final short INVALID_ENCRYPTION_STATE = 2803;		// S
+			static final short INVALID_DECRYPTION_STATE = 2804;		// S
+			static final short INVALID_ENCRYPTION_PARAMETER = 2805;		// S
+			static final short INVALID_DECRYPTION_PARAMETER = 2806;		// S
+			static final short INVALID_AUDITING_STATE = 2807;		// S
+			static final short INVALID_DECRYPTION_MAC = 2808;		// S
+			static final short INVALID_DECRYPTION_SIZE = 2809;		// S
+			static final short INVALID_HASH_SESSION_KEY = 2800;		// S
+			static final short TEMPORARY_DATA_SIZE = 256;		// S
+			static final short DECRYPTED_DATA_SIZE = 512;		// S
+			static final short MAXSIZE = 50;		// S
+		}
+
+		.publicMethodTable 7 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method protected <init>()V 0 {
+			.stack 5;
+			.locals 1;
+
+				L0:	aload_0;
+					invokespecial 105;		// javacard/framework/Applet.<init>()V
+					aload_0;
+					sconst_1;
+					putfield_b 0;		// byte cryptoDSE/CryptoDSE.stateAuditing
+					aload_0;
+					sconst_1;
+					putfield_b 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+					aload_0;
+					sconst_1;
+					putfield_b 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					sspush -32512;
+					sstore_1;
+				L1:	aload_0;
+					new 87;		// javacard/security/KeyPair
+					dup;
+					sconst_5;
+					sload_1;
+					invokespecial 95;		// javacard/security/KeyPair.<init>(BS)V
+					putfield_a 3;		// reference cryptoDSE/CryptoDSE.kp
+					getfield_a_this 3;		// reference cryptoDSE/CryptoDSE.kp
+					invokevirtual 115;		// genKeyPair()V
+					aload_0;
+					getfield_a_this 3;		// reference cryptoDSE/CryptoDSE.kp
+					invokevirtual 56;		// getPublic()Ljavacard/security/PublicKey;
+					checkcast 0 58;		// T_CLASSORINTERFACE javacard/security/ECPublicKey
+					putfield_a 4;		// reference cryptoDSE/CryptoDSE.cardPublicKey
+					aload_0;
+					getfield_a_this 3;		// reference cryptoDSE/CryptoDSE.kp
+					invokevirtual 88;		// getPrivate()Ljavacard/security/PrivateKey;
+					checkcast 0 89;		// T_CLASSORINTERFACE javacard/security/ECPrivateKey
+					putfield_a 5;		// reference cryptoDSE/CryptoDSE.cardPrivateKey
+					aload_0;
+					sconst_3;
+					sconst_0;
+					invokestatic 104;		// javacard/security/KeyAgreement.getInstance(BZ)Ljavacard/security/KeyAgreement;
+					putfield_a 6;		// reference cryptoDSE/CryptoDSE.ka
+					aload_0;
+					new 112;		// cryptoDSE/ListInstances
+					dup;
+					invokespecial 114;		// cryptoDSE/ListInstances.<init>()V
+					putfield_a 7;		// reference cryptoDSE/CryptoDSE.li
+					aload_0;
+					bspush 15;
+					sspush 128;
+					sconst_0;
+					invokestatic 117;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 55;		// T_CLASSORINTERFACE javacard/security/AESKey
+					putfield_a 8;		// reference cryptoDSE/CryptoDSE.desKey
+					aload_0;
+					bspush 64;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 9;		// reference cryptoDSE/CryptoDSE.h
+					aload_0;
+					bspush 64;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 10;		// reference cryptoDSE/CryptoDSE.encKey
+					aload_0;
+					bspush 64;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 11;		// reference cryptoDSE/CryptoDSE.macH
+					aload_0;
+					bspush 64;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					aload_0;
+					bspush 13;
+					sconst_0;
+					invokestatic 90;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+					putfield_a 13;		// reference cryptoDSE/CryptoDSE.cipher
+					aload_0;
+					bspush -109;
+					sconst_0;
+					invokestatic 98;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+					putfield_a 14;		// reference cryptoDSE/CryptoDSE.macSig
+					aload_0;
+					bspush 15;
+					sspush 128;
+					sconst_0;
+					invokestatic 117;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 55;		// T_CLASSORINTERFACE javacard/security/AESKey
+					putfield_a 15;		// reference cryptoDSE/CryptoDSE.macKey
+					aload_0;
+					bspush 17;
+					sconst_0;
+					invokestatic 98;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+					putfield_a 16;		// reference cryptoDSE/CryptoDSE.sig
+					aload_0;
+					sconst_2;
+					invokestatic 113;		// javacard/security/RandomData.getInstance(B)Ljavacard/security/RandomData;
+					putfield_a 17;		// reference cryptoDSE/CryptoDSE.rd
+					aload_0;
+					bspush 16;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 18;		// reference cryptoDSE/CryptoDSE.iv
+					aload_0;
+					sspush 256;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 20;		// reference cryptoDSE/CryptoDSE.publicData
+					aload_0;
+					bspush 20;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 21;		// reference cryptoDSE/CryptoDSE.macData
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 22;		// reference cryptoDSE/CryptoDSE.qn
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 23;		// reference cryptoDSE/CryptoDSE.g
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 24;		// reference cryptoDSE/CryptoDSE.c
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 25;		// reference cryptoDSE/CryptoDSE.dc
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 26;		// reference cryptoDSE/CryptoDSE.s
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 27;		// reference cryptoDSE/CryptoDSE.gs
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 28;		// reference cryptoDSE/CryptoDSE.modN
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 29;		// reference cryptoDSE/CryptoDSE.t
+					aload_0;
+					sspush 128;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 30;		// reference cryptoDSE/CryptoDSE.secret
+					aload_0;
+					sspush 512;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 31;		// reference cryptoDSE/CryptoDSE.decryptedData
+					aload_0;
+					sconst_1;
+					sconst_0;
+					invokestatic 106;		// javacard/security/MessageDigest.getInstance(BZ)Ljavacard/security/MessageDigest;
+					putfield_a 32;		// reference cryptoDSE/CryptoDSE.md
+					aload_0;
+					bspush 50;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 33;		// reference cryptoDSE/CryptoDSE.sumResult
+					aload_0;
+					bspush 50;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					aload_0;
+					bspush 50;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 35;		// reference cryptoDSE/CryptoDSE.multiplyModResult
+					aload_0;
+					bspush 50;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 36;		// reference cryptoDSE/CryptoDSE.one
+					aload_0;
+					bspush 50;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 37;		// reference cryptoDSE/CryptoDSE.shift
+					aload_0;
+					bspush 50;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 38;		// reference cryptoDSE/CryptoDSE.modulus
+					aload_0;
+					bspush 50;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 39;		// reference cryptoDSE/CryptoDSE.minusModulus
+					aload_0;
+					sconst_2;
+					sconst_2;
+					invokestatic 57;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 40;		// reference cryptoDSE/CryptoDSE.shortArray
+					return;
+		}
+
+		.method public static install([BSB)V 1 {
+			.stack 2;
+			.locals 0;
+
+				L0:	new 59;		// cryptoDSE/CryptoDSE
+					dup;
+					invokespecial 60;		// cryptoDSE/CryptoDSE.<init>()V
+					invokevirtual 61;		// register()V
+					return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 4;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 62;		// getBuffer()[B
+					astore_2;
+				L1:	aload_2;
+					sconst_0;
+					aload_2;
+					sconst_0;
+					baload;
+					bspush -4;
+					sand;
+					bastore;
+					aload_2;
+					sconst_0;
+					baload;
+					ifne L4;
+				L2:	aload_2;
+					sconst_1;
+					baload;
+					bspush -92;
+					if_scmpne L4;
+				L3:	return;
+				L4:	aload_2;
+					sconst_0;
+					baload;
+					bspush -128;
+					if_scmpeq L6;
+				L5:	sspush 28160;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	aload_2;
+					sconst_1;
+					baload;
+					slookupswitch L14 7 16 L7 32 L8 48 L9 64 L10 80 L11 96 L12 112 L13;
+				L7:	aload_0;
+					aload_1;
+					invokespecial 64;		// cryptoDSE/CryptoDSE.keyGen(Ljavacard/framework/APDU;)V
+					return;
+				L8:	aload_0;
+					aload_1;
+					invokespecial 65;		// cryptoDSE/CryptoDSE.encrypt(Ljavacard/framework/APDU;)V
+					return;
+				L9:	aload_0;
+					aload_1;
+					invokespecial 66;		// cryptoDSE/CryptoDSE.decrypt(Ljavacard/framework/APDU;)V
+					return;
+				L10:	aload_0;
+					aload_1;
+					invokespecial 67;		// cryptoDSE/CryptoDSE.audit(Ljavacard/framework/APDU;)V
+					return;
+				L11:	aload_0;
+					aload_1;
+					invokespecial 68;		// cryptoDSE/CryptoDSE.delete(Ljavacard/framework/APDU;)V
+					return;
+				L12:	aload_0;
+					aload_1;
+					invokespecial 69;		// cryptoDSE/CryptoDSE.getECData(Ljavacard/framework/APDU;)V
+					return;
+				L13:	aload_0;
+					aload_1;
+					invokespecial 70;		// cryptoDSE/CryptoDSE.nope(Ljavacard/framework/APDU;)V
+					return;
+				L14:	sspush 27904;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+					return;
+		}
+
+		.method private getECData(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 13;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 62;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 71;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	bspush 64;
+					newarray 11;
+					astore 4;
+				L3:	bspush 64;
+					newarray 11;
+					astore 5;
+				L4:	bspush 64;
+					newarray 11;
+					astore 6;
+				L5:	getfield_a_this 4;		// reference cryptoDSE/CryptoDSE.cardPublicKey
+					getfield_a_this 23;		// reference cryptoDSE/CryptoDSE.g
+					sconst_0;
+					invokeinterface 3 58 15;		// javacard/security/ECPublicKey
+					sstore 7;
+				L6:	getfield_a_this 28;		// reference cryptoDSE/CryptoDSE.modN
+					sconst_0;
+					sconst_0;
+					bastore;
+					getfield_a_this 4;		// reference cryptoDSE/CryptoDSE.cardPublicKey
+					getfield_a_this 28;		// reference cryptoDSE/CryptoDSE.modN
+					sconst_1;
+					invokeinterface 3 58 16;		// javacard/security/ECPublicKey
+					sstore 8;
+				L7:	sinc 8 1;
+					aload 4;
+					sconst_0;
+					sconst_0;
+					bastore;
+					getfield_a_this 4;		// reference cryptoDSE/CryptoDSE.cardPublicKey
+					aload 4;
+					sconst_1;
+					invokeinterface 3 58 13;		// javacard/security/ECPublicKey
+					sstore 9;
+				L8:	sinc 9 1;
+					aload 5;
+					sconst_0;
+					sconst_0;
+					bastore;
+					getfield_a_this 4;		// reference cryptoDSE/CryptoDSE.cardPublicKey
+					aload 5;
+					sconst_1;
+					invokeinterface 3 58 14;		// javacard/security/ECPublicKey
+					sstore 10;
+				L9:	sinc 10 1;
+					aload 6;
+					sconst_0;
+					sconst_0;
+					bastore;
+					getfield_a_this 4;		// reference cryptoDSE/CryptoDSE.cardPublicKey
+					aload 6;
+					sconst_1;
+					invokeinterface 3 58 12;		// javacard/security/ECPublicKey
+					sstore 11;
+				L10:	sinc 11 1;
+					sconst_0;
+					sstore 12;
+				L11:	getfield_a_this 4;		// reference cryptoDSE/CryptoDSE.cardPublicKey
+					invokeinterface 1 58 17;		// javacard/security/ECPublicKey
+					sstore 12;
+					aload_2;
+					sconst_0;
+					sload 7;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_1;
+					sload 8;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_2;
+					sload 9;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_3;
+					sload 10;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_4;
+					sload 11;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_5;
+					sload 12;
+					sspush -256;
+					sand;
+					bspush 8;
+					sshl;
+					s2b;
+					bastore;
+					aload_2;
+					bspush 6;
+					sload 12;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					bspush 7;
+					sstore 13;
+				L12:	sconst_0;
+					sstore 14;
+				L13:	sload 14;
+					sload 7;
+					if_scmpge L15;
+				L14:	aload_2;
+					sload 13;
+					getfield_a_this 23;		// reference cryptoDSE/CryptoDSE.g
+					sload 14;
+					baload;
+					bastore;
+					sinc 14 1;
+					sinc 13 1;
+					goto L13;
+				L15:	sconst_0;
+					sstore 14;
+				L16:	sload 14;
+					sload 8;
+					if_scmpge L18;
+				L17:	aload_2;
+					sload 13;
+					getfield_a_this 28;		// reference cryptoDSE/CryptoDSE.modN
+					sload 14;
+					baload;
+					bastore;
+					sinc 14 1;
+					sinc 13 1;
+					goto L16;
+				L18:	sconst_0;
+					sstore 14;
+				L19:	sload 14;
+					sload 9;
+					if_scmpge L21;
+				L20:	aload_2;
+					sload 13;
+					aload 4;
+					sload 14;
+					baload;
+					bastore;
+					sinc 14 1;
+					sinc 13 1;
+					goto L19;
+				L21:	sconst_0;
+					sstore 14;
+				L22:	sload 14;
+					sload 10;
+					if_scmpge L24;
+				L23:	aload_2;
+					sload 13;
+					aload 5;
+					sload 14;
+					baload;
+					bastore;
+					sinc 14 1;
+					sinc 13 1;
+					goto L22;
+				L24:	sconst_0;
+					sstore 14;
+				L25:	sload 14;
+					sload 11;
+					if_scmpge L27;
+				L26:	aload_2;
+					sload 13;
+					aload 6;
+					sload 14;
+					baload;
+					bastore;
+					sinc 14 1;
+					sinc 13 1;
+					goto L25;
+				L27:	sload 7;
+					sload 8;
+					sadd;
+					sload 9;
+					sadd;
+					sload 10;
+					sadd;
+					sload 11;
+					sadd;
+					bspush 7;
+					sadd;
+					sstore 14;
+				L28:	aload_1;
+					invokevirtual 72;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 14;
+					invokevirtual 73;		// setOutgoingLength(S)V
+					aload_1;
+					aload_2;
+					sconst_0;
+					sload 14;
+					invokevirtual 74;		// sendBytesLong([BSS)V
+					return;
+		}
+
+		.method private nope(Ljavacard/framework/APDU;)V {
+			.stack 0;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	return;
+		}
+
+		.method private delete(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 10;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 62;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 71;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	aload_2;
+					sconst_5;
+					baload;
+					bspush 8;
+					sshl;
+					aload_2;
+					bspush 6;
+					baload;
+					sadd;
+					sstore 4;
+				L3:	getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 4;
+					invokevirtual 75;		// isValid(S)Z
+					ifne L5;
+				L4:	sspush 2801;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L5:	getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 4;
+					invokevirtual 76;		// removeInstance(S)V
+					getfield_a_this 16;		// reference cryptoDSE/CryptoDSE.sig
+					getfield_a_this 5;		// reference cryptoDSE/CryptoDSE.cardPrivateKey
+					sconst_1;
+					invokevirtual 77;		// init(Ljavacard/security/Key;B)V
+					bspush 9;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 68;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 101;
+					bastore;
+					dup;
+					sconst_2;
+					bspush 108;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 101;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 116;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 100;
+					bastore;
+					dup;
+					bspush 7;
+					aload_2;
+					sconst_5;
+					baload;
+					bastore;
+					dup;
+					bspush 8;
+					aload_2;
+					bspush 6;
+					baload;
+					bastore;
+					astore 5;
+				L6:	sspush 128;
+					newarray 11;
+					astore 6;
+				L7:	getfield_a_this 16;		// reference cryptoDSE/CryptoDSE.sig
+					aload 5;
+					sconst_0;
+					aload 5;
+					arraylength;
+					aload 6;
+					sconst_0;
+					invokevirtual 78;		// sign([BSS[BS)S
+					sstore 7;
+				L8:	aload_2;
+					sconst_0;
+					sload 7;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					sconst_1;
+					sstore 8;
+				L9:	sconst_0;
+					sstore 9;
+				L10:	sload 9;
+					sload 7;
+					if_scmpge L12;
+				L11:	aload_2;
+					sload 8;
+					aload 6;
+					sload 9;
+					baload;
+					bastore;
+					sinc 9 1;
+					sinc 8 1;
+					goto L10;
+				L12:	sspush 128;
+					newarray 11;
+					astore 9;
+				L13:	getfield_a_this 4;		// reference cryptoDSE/CryptoDSE.cardPublicKey
+					aload 9;
+					sconst_0;
+					invokeinterface 3 58 19;		// javacard/security/ECPublicKey
+					sstore 10;
+				L14:	sconst_0;
+					sstore 11;
+				L15:	sload 11;
+					sload 10;
+					if_scmpge L17;
+				L16:	aload_2;
+					sload 8;
+					aload 9;
+					sload 11;
+					baload;
+					bastore;
+					sinc 11 1;
+					sinc 8 1;
+					goto L15;
+				L17:	aload_1;
+					invokevirtual 72;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 8;
+					invokevirtual 73;		// setOutgoingLength(S)V
+					aload_1;
+					aload_2;
+					sconst_0;
+					sload 8;
+					invokevirtual 74;		// sendBytesLong([BSS)V
+					return;
+		}
+
+		.method private audit(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 15;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 62;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 71;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sspush 128;
+					newarray 11;
+					astore 4;
+				L3:	sspush 128;
+					newarray 11;
+					astore 5;
+				L4:	aload_2;
+					sconst_5;
+					baload;
+					bspush 8;
+					sshl;
+					aload_2;
+					bspush 6;
+					baload;
+					sadd;
+					sstore 7;
+				L5:	getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 7;
+					invokevirtual 75;		// isValid(S)Z
+					ifne L7;
+				L6:	sspush 2801;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L7:	aload_2;
+					sconst_4;
+					baload;
+					bspush 22;
+					ssub;
+					sstore 8;
+				L8:	aload_2;
+					bspush 7;
+					getfield_a_this 20;		// reference cryptoDSE/CryptoDSE.publicData
+					sconst_0;
+					sload 8;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 7;
+					invokevirtual 80;		// getInstance(S)LcryptoDSE/InstanceKeys;
+					invokevirtual 81;		// getPrivateKey()Ljavacard/security/ECPrivateKey;
+					invokevirtual 82;		// init(Ljavacard/security/PrivateKey;)V
+					getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					getfield_a_this 20;		// reference cryptoDSE/CryptoDSE.publicData
+					sconst_0;
+					sload 8;
+					getfield_a_this 30;		// reference cryptoDSE/CryptoDSE.secret
+					sconst_0;
+					invokevirtual 83;		// generateSecret([BSS[BS)S
+					sstore 8;
+					getfield_a_this 30;		// reference cryptoDSE/CryptoDSE.secret
+					sconst_0;
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 8;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sload 8;
+					bspush 17;
+					bastore;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 8;
+					sconst_1;
+					sadd;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					bspush 20;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					aload_2;
+					sconst_5;
+					aload_2;
+					sconst_4;
+					baload;
+					sadd;
+					bspush 20;
+					ssub;
+					bspush 20;
+					invokestatic 86;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifeq L10;
+				L9:	sspush 2800;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L10:	getfield_a_this 3;		// reference cryptoDSE/CryptoDSE.kp
+					invokevirtual 115;		// genKeyPair()V
+					aload_0;
+					getfield_a_this 3;		// reference cryptoDSE/CryptoDSE.kp
+					invokevirtual 56;		// getPublic()Ljavacard/security/PublicKey;
+					checkcast 0 58;		// T_CLASSORINTERFACE javacard/security/ECPublicKey
+					putfield_a 41;		// reference cryptoDSE/CryptoDSE.auditPublicKey
+					aload_0;
+					getfield_a_this 3;		// reference cryptoDSE/CryptoDSE.kp
+					invokevirtual 88;		// getPrivate()Ljavacard/security/PrivateKey;
+					checkcast 0 89;		// T_CLASSORINTERFACE javacard/security/ECPrivateKey
+					putfield_a 42;		// reference cryptoDSE/CryptoDSE.auditPrivateKey
+					getfield_a_this 26;		// reference cryptoDSE/CryptoDSE.s
+					sconst_0;
+					sconst_0;
+					bastore;
+					aload_0;
+					getfield_a_this 42;		// reference cryptoDSE/CryptoDSE.auditPrivateKey
+					getfield_a_this 26;		// reference cryptoDSE/CryptoDSE.s
+					sconst_1;
+					invokeinterface 3 89 19;		// javacard/security/ECPrivateKey
+					putfield_s 43;		// short cryptoDSE/CryptoDSE.sizeAuditPrivateKey
+					aload_0;
+					dup;
+					getfield_s 43;		// short cryptoDSE/CryptoDSE.sizeAuditPrivateKey
+					sconst_1;
+					sadd;
+					putfield_s 43;		// short cryptoDSE/CryptoDSE.sizeAuditPrivateKey
+					aload_0;
+					getfield_a_this 41;		// reference cryptoDSE/CryptoDSE.auditPublicKey
+					getfield_a_this 27;		// reference cryptoDSE/CryptoDSE.gs
+					sconst_0;
+					invokeinterface 3 58 19;		// javacard/security/ECPublicKey
+					putfield_s 44;		// short cryptoDSE/CryptoDSE.sizeAuditPublicKey
+					getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					getfield_a_this 42;		// reference cryptoDSE/CryptoDSE.auditPrivateKey
+					invokevirtual 82;		// init(Ljavacard/security/PrivateKey;)V
+					getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					aload_2;
+					bspush 7;
+					sload_3;
+					bspush 22;
+					ssub;
+					aload 4;
+					sconst_0;
+					invokevirtual 83;		// generateSecret([BSS[BS)S
+					sstore 6;
+				L11:	getfield_a_this 41;		// reference cryptoDSE/CryptoDSE.auditPublicKey
+					getfield_a_this 23;		// reference cryptoDSE/CryptoDSE.g
+					sconst_0;
+					invokeinterface 3 58 15;		// javacard/security/ECPublicKey
+					sstore 9;
+				L12:	getfield_a_this 28;		// reference cryptoDSE/CryptoDSE.modN
+					sconst_0;
+					sconst_0;
+					bastore;
+					getfield_a_this 41;		// reference cryptoDSE/CryptoDSE.auditPublicKey
+					getfield_a_this 28;		// reference cryptoDSE/CryptoDSE.modN
+					sconst_1;
+					invokeinterface 3 58 16;		// javacard/security/ECPublicKey
+					sstore 10;
+				L13:	sinc 10 1;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 23;		// reference cryptoDSE/CryptoDSE.g
+					sconst_0;
+					sload 9;
+					invokevirtual 91;		// update([BSS)V
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 27;		// reference cryptoDSE/CryptoDSE.gs
+					sconst_0;
+					getfield_s_this 44;		// short cryptoDSE/CryptoDSE.sizeAuditPublicKey
+					invokevirtual 91;		// update([BSS)V
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					aload 4;
+					sconst_0;
+					sload 6;
+					invokevirtual 91;		// update([BSS)V
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					aload_2;
+					bspush 7;
+					sload_3;
+					bspush 22;
+					ssub;
+					getfield_a_this 24;		// reference cryptoDSE/CryptoDSE.c
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					sstore 11;
+				L14:	getfield_a_this 25;		// reference cryptoDSE/CryptoDSE.dc
+					sconst_0;
+					sconst_0;
+					bastore;
+					getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 7;
+					invokevirtual 80;		// getInstance(S)LcryptoDSE/InstanceKeys;
+					invokevirtual 81;		// getPrivateKey()Ljavacard/security/ECPrivateKey;
+					getfield_a_this 25;		// reference cryptoDSE/CryptoDSE.dc
+					sconst_1;
+					invokeinterface 3 89 19;		// javacard/security/ECPrivateKey
+					sstore 12;
+				L15:	sinc 12 1;
+					getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 7;
+					invokevirtual 80;		// getInstance(S)LcryptoDSE/InstanceKeys;
+					invokevirtual 81;		// getPrivateKey()Ljavacard/security/ECPrivateKey;
+					invokevirtual 82;		// init(Ljavacard/security/PrivateKey;)V
+					sload 12;
+					newarray 11;
+					astore 13;
+				L16:	sload 12;
+					sload 11;
+					ssub;
+					sstore 14;
+				L17:	sconst_0;
+					sstore 15;
+				L18:	sload 15;
+					sload 14;
+					if_scmpge L20;
+				L19:	aload 13;
+					sload 15;
+					sconst_0;
+					bastore;
+					sinc 15 1;
+					goto L18;
+				L20:	sconst_0;
+					sstore 15;
+				L21:	sload 15;
+					sload 11;
+					if_scmpge L23;
+				L22:	aload 13;
+					sload 15;
+					sload 14;
+					sadd;
+					getfield_a_this 24;		// reference cryptoDSE/CryptoDSE.c
+					sload 15;
+					baload;
+					bastore;
+					sinc 15 1;
+					goto L21;
+				L23:	aload_0;
+					getfield_a_this 28;		// reference cryptoDSE/CryptoDSE.modN
+					sload 10;
+					invokespecial 92;		// cryptoDSE/CryptoDSE.setModulus([BS)V
+					aload_0;
+					aload_0;
+					aload 13;
+					getfield_a_this 25;		// reference cryptoDSE/CryptoDSE.dc
+					invokespecial 93;		// cryptoDSE/CryptoDSE.multiplyModByteArrays([B[B)[B
+					putfield_a 29;		// reference cryptoDSE/CryptoDSE.t
+					aload_0;
+					aload_0;
+					getfield_a_this 29;		// reference cryptoDSE/CryptoDSE.t
+					getfield_a_this 26;		// reference cryptoDSE/CryptoDSE.s
+					invokespecial 94;		// cryptoDSE/CryptoDSE.sumModByteArrays([B[B)[B
+					putfield_a 29;		// reference cryptoDSE/CryptoDSE.t
+					aload_2;
+					sconst_0;
+					getfield_s_this 44;		// short cryptoDSE/CryptoDSE.sizeAuditPublicKey
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_1;
+					sload 6;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_2;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_3;
+					sload 8;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					sconst_4;
+					sstore 15;
+				L24:	sconst_0;
+					sstore 16;
+				L25:	sload 16;
+					getfield_s_this 44;		// short cryptoDSE/CryptoDSE.sizeAuditPublicKey
+					if_scmpge L27;
+				L26:	aload_2;
+					sload 15;
+					getfield_a_this 27;		// reference cryptoDSE/CryptoDSE.gs
+					sload 16;
+					baload;
+					bastore;
+					sinc 16 1;
+					sinc 15 1;
+					goto L25;
+				L27:	sconst_0;
+					sstore 16;
+				L28:	sload 16;
+					sload 6;
+					if_scmpge L30;
+				L29:	aload_2;
+					sload 15;
+					aload 4;
+					sload 16;
+					baload;
+					bastore;
+					sinc 16 1;
+					sinc 15 1;
+					goto L28;
+				L30:	sconst_0;
+					sstore 16;
+				L31:	sload 16;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					if_scmpge L33;
+				L32:	aload_2;
+					sload 15;
+					getfield_a_this 29;		// reference cryptoDSE/CryptoDSE.t
+					sload 16;
+					baload;
+					bastore;
+					sinc 16 1;
+					sinc 15 1;
+					goto L31;
+				L33:	sconst_0;
+					sstore 16;
+				L34:	sload 16;
+					sload 8;
+					if_scmpge L36;
+				L35:	aload_2;
+					sload 15;
+					getfield_a_this 30;		// reference cryptoDSE/CryptoDSE.secret
+					sload 16;
+					baload;
+					bastore;
+					sinc 16 1;
+					sinc 15 1;
+					goto L34;
+				L36:	getfield_s_this 44;		// short cryptoDSE/CryptoDSE.sizeAuditPublicKey
+					sload 6;
+					sadd;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sadd;
+					sload 8;
+					sadd;
+					sconst_4;
+					sadd;
+					sstore 16;
+				L37:	aload_1;
+					invokevirtual 72;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 16;
+					invokevirtual 73;		// setOutgoingLength(S)V
+					aload_1;
+					aload_2;
+					sconst_0;
+					sload 16;
+					invokevirtual 74;		// sendBytesLong([BSS)V
+					return;
+		}
+
+		.method private keyGen(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 3;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 62;		// getBuffer()[B
+					astore_2;
+				L1:	getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					invokevirtual 96;		// createInstance()S
+					sstore_3;
+				L2:	aload_2;
+					sconst_0;
+					sload_3;
+					bspush 8;
+					sshr;
+					s2b;
+					bastore;
+					aload_2;
+					sconst_1;
+					sload_3;
+					sspush 255;
+					sand;
+					s2b;
+					bastore;
+					getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload_3;
+					invokevirtual 80;		// getInstance(S)LcryptoDSE/InstanceKeys;
+					invokevirtual 97;		// getPublicKey()Ljavacard/security/ECPublicKey;
+					aload_2;
+					sconst_2;
+					invokeinterface 3 58 19;		// javacard/security/ECPublicKey
+					sstore 4;
+				L3:	aload_1;
+					invokevirtual 72;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 4;
+					sconst_2;
+					sadd;
+					invokevirtual 73;		// setOutgoingLength(S)V
+					aload_1;
+					aload_2;
+					sconst_0;
+					sload 4;
+					sconst_2;
+					sadd;
+					invokevirtual 74;		// sendBytesLong([BSS)V
+					return;
+		}
+
+		.method private encrypt(Ljavacard/framework/APDU;)V {
+			.stack 7;
+			.locals 7;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 62;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 71;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sconst_0;
+					sstore 4;
+				L3:	aload_2;
+					sconst_2;
+					baload;
+					sstore 5;
+				L4:	sload 5;
+					sconst_1;
+					if_scmpne_w L14;
+				L5:	getfield_b_this 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+					sconst_1;
+					if_scmpeq L7;
+				L6:	sspush 2803;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L7:	aload_2;
+					sconst_5;
+					baload;
+					bspush 8;
+					sshl;
+					aload_2;
+					bspush 6;
+					baload;
+					sadd;
+					sstore 6;
+				L8:	getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 6;
+					invokevirtual 75;		// isValid(S)Z
+					ifne L10;
+				L9:	aload_0;
+					sconst_1;
+					putfield_b 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+					sspush 2801;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L10:	getfield_a_this 3;		// reference cryptoDSE/CryptoDSE.kp
+					invokevirtual 115;		// genKeyPair()V
+					aload_0;
+					getfield_a_this 3;		// reference cryptoDSE/CryptoDSE.kp
+					invokevirtual 56;		// getPublic()Ljavacard/security/PublicKey;
+					checkcast 0 58;		// T_CLASSORINTERFACE javacard/security/ECPublicKey
+					putfield_a 46;		// reference cryptoDSE/CryptoDSE.ephemeralPublicKey
+					getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 6;
+					invokevirtual 80;		// getInstance(S)LcryptoDSE/InstanceKeys;
+					invokevirtual 81;		// getPrivateKey()Ljavacard/security/ECPrivateKey;
+					invokevirtual 82;		// init(Ljavacard/security/PrivateKey;)V
+					getfield_a_this 46;		// reference cryptoDSE/CryptoDSE.ephemeralPublicKey
+					getfield_a_this 20;		// reference cryptoDSE/CryptoDSE.publicData
+					sconst_0;
+					invokeinterface 3 58 19;		// javacard/security/ECPublicKey
+					sstore 7;
+				L11:	getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					getfield_a_this 20;		// reference cryptoDSE/CryptoDSE.publicData
+					sconst_0;
+					sload 7;
+					getfield_a_this 30;		// reference cryptoDSE/CryptoDSE.secret
+					sconst_0;
+					invokevirtual 83;		// generateSecret([BSS[BS)S
+					sstore 8;
+				L12:	getfield_a_this 30;		// reference cryptoDSE/CryptoDSE.secret
+					sconst_0;
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 8;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sload 8;
+					sconst_1;
+					bastore;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 8;
+					sconst_1;
+					sadd;
+					getfield_a_this 10;		// reference cryptoDSE/CryptoDSE.encKey
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sload 8;
+					bspush 16;
+					bastore;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 8;
+					sconst_1;
+					sadd;
+					getfield_a_this 11;		// reference cryptoDSE/CryptoDSE.macH
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sload 8;
+					bspush 17;
+					bastore;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 8;
+					sconst_1;
+					sadd;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					bspush 20;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 8;		// reference cryptoDSE/CryptoDSE.desKey
+					getfield_a_this 10;		// reference cryptoDSE/CryptoDSE.encKey
+					bspush 16;
+					invokeinterface 3 55 4;		// javacard/security/AESKey
+					getfield_a_this 15;		// reference cryptoDSE/CryptoDSE.macKey
+					getfield_a_this 11;		// reference cryptoDSE/CryptoDSE.macH
+					sconst_4;
+					invokeinterface 3 55 4;		// javacard/security/AESKey
+					getfield_a_this 17;		// reference cryptoDSE/CryptoDSE.rd
+					getfield_a_this 18;		// reference cryptoDSE/CryptoDSE.iv
+					sconst_0;
+					bspush 16;
+					invokevirtual 99;		// generateData([BSS)V
+					getfield_a_this 13;		// reference cryptoDSE/CryptoDSE.cipher
+					getfield_a_this 8;		// reference cryptoDSE/CryptoDSE.desKey
+					sconst_2;
+					getfield_a_this 18;		// reference cryptoDSE/CryptoDSE.iv
+					sconst_0;
+					bspush 16;
+					invokevirtual 100;		// init(Ljavacard/security/Key;B[BSS)V
+					getfield_a_this 14;		// reference cryptoDSE/CryptoDSE.macSig
+					getfield_a_this 15;		// reference cryptoDSE/CryptoDSE.macKey
+					sconst_1;
+					invokevirtual 77;		// init(Ljavacard/security/Key;B)V
+					aload_0;
+					sconst_2;
+					putfield_b 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+					getfield_a_this 20;		// reference cryptoDSE/CryptoDSE.publicData
+					sconst_0;
+					aload_2;
+					sconst_0;
+					sload 7;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 18;		// reference cryptoDSE/CryptoDSE.iv
+					sconst_0;
+					aload_2;
+					sload 7;
+					bspush 16;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					aload_2;
+					sload 7;
+					bspush 16;
+					sadd;
+					bspush 20;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 7;
+					bspush 16;
+					sadd;
+					bspush 20;
+					sadd;
+					sstore 4;
+				L13:	goto_w L31;
+				L14:	sload 5;
+					sconst_2;
+					if_scmpne L20;
+				L15:	getfield_b_this 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+					sconst_2;
+					if_scmpeq L17;
+				L16:	sspush 2803;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L17:	getfield_a_this 13;		// reference cryptoDSE/CryptoDSE.cipher
+					aload_2;
+					sconst_5;
+					sload_3;
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					invokevirtual 101;		// update([BSS[BS)S
+					sstore 6;
+				L18:	getfield_a_this 14;		// reference cryptoDSE/CryptoDSE.macSig
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					sload 6;
+					invokevirtual 102;		// update([BSS)V
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					aload_2;
+					sconst_0;
+					sload 6;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 6;
+					sstore 4;
+				L19:	goto L31;
+				L20:	sload 5;
+					sconst_3;
+					if_scmpne L26;
+				L21:	getfield_b_this 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+					sconst_2;
+					if_scmpeq L23;
+				L22:	sspush 2803;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L23:	getfield_a_this 13;		// reference cryptoDSE/CryptoDSE.cipher
+					aload_2;
+					sconst_5;
+					sload_3;
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					invokevirtual 103;		// doFinal([BSS[BS)S
+					sstore 6;
+				L24:	aload_0;
+					getfield_a_this 14;		// reference cryptoDSE/CryptoDSE.macSig
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					sload 6;
+					getfield_a_this 21;		// reference cryptoDSE/CryptoDSE.macData
+					sconst_0;
+					invokevirtual 78;		// sign([BSS[BS)S
+					putfield_s 47;		// short cryptoDSE/CryptoDSE.macDataLen
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					aload_2;
+					sconst_0;
+					sload 6;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 6;
+					sstore 4;
+					aload_0;
+					sconst_3;
+					putfield_b 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+				L25:	goto L31;
+				L26:	sload 5;
+					sconst_4;
+					if_scmpne L30;
+				L27:	getfield_b_this 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+					sconst_3;
+					if_scmpeq L29;
+				L28:	sspush 2803;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L29:	getfield_a_this 21;		// reference cryptoDSE/CryptoDSE.macData
+					sconst_0;
+					aload_2;
+					sconst_0;
+					getfield_s_this 47;		// short cryptoDSE/CryptoDSE.macDataLen
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_s_this 47;		// short cryptoDSE/CryptoDSE.macDataLen
+					sstore 4;
+					aload_0;
+					sconst_1;
+					putfield_b 1;		// byte cryptoDSE/CryptoDSE.stateEncryption
+					goto L31;
+				L30:	sspush 2805;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L31:	aload_1;
+					invokevirtual 72;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 4;
+					invokevirtual 73;		// setOutgoingLength(S)V
+					aload_1;
+					aload_2;
+					sconst_0;
+					sload 4;
+					invokevirtual 74;		// sendBytesLong([BSS)V
+					return;
+		}
+
+		.method private decrypt(Ljavacard/framework/APDU;)V {
+			.stack 7;
+			.locals 6;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 62;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 71;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sconst_0;
+					sstore 4;
+				L3:	aload_2;
+					sconst_2;
+					baload;
+					sstore 5;
+				L4:	sload 5;
+					sconst_1;
+					if_scmpne_w L14;
+				L5:	getfield_b_this 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					sconst_1;
+					if_scmpeq L7;
+				L6:	sspush 2804;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L7:	aload_2;
+					sconst_5;
+					baload;
+					bspush 8;
+					sshl;
+					aload_2;
+					bspush 6;
+					baload;
+					sadd;
+					sstore 6;
+				L8:	getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 6;
+					invokevirtual 75;		// isValid(S)Z
+					ifne L10;
+				L9:	aload_0;
+					sconst_1;
+					putfield_b 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					sspush 2801;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L10:	aload_2;
+					sconst_4;
+					baload;
+					bspush 38;
+					ssub;
+					sstore 7;
+				L11:	aload_2;
+					bspush 7;
+					getfield_a_this 20;		// reference cryptoDSE/CryptoDSE.publicData
+					sconst_0;
+					sload 7;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					getfield_a_this 7;		// reference cryptoDSE/CryptoDSE.li
+					sload 6;
+					invokevirtual 80;		// getInstance(S)LcryptoDSE/InstanceKeys;
+					invokevirtual 81;		// getPrivateKey()Ljavacard/security/ECPrivateKey;
+					invokevirtual 82;		// init(Ljavacard/security/PrivateKey;)V
+					getfield_a_this 6;		// reference cryptoDSE/CryptoDSE.ka
+					getfield_a_this 20;		// reference cryptoDSE/CryptoDSE.publicData
+					sconst_0;
+					sload 7;
+					getfield_a_this 30;		// reference cryptoDSE/CryptoDSE.secret
+					sconst_0;
+					invokevirtual 83;		// generateSecret([BSS[BS)S
+					sstore 7;
+					getfield_a_this 30;		// reference cryptoDSE/CryptoDSE.secret
+					sconst_0;
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 7;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sload 7;
+					sconst_1;
+					bastore;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 7;
+					sconst_1;
+					sadd;
+					getfield_a_this 10;		// reference cryptoDSE/CryptoDSE.encKey
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sload 7;
+					bspush 16;
+					bastore;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 7;
+					sconst_1;
+					sadd;
+					getfield_a_this 11;		// reference cryptoDSE/CryptoDSE.macH
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sload 7;
+					bspush 17;
+					bastore;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 9;		// reference cryptoDSE/CryptoDSE.h
+					sconst_0;
+					sload 7;
+					sconst_1;
+					sadd;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					invokevirtual 84;		// reset()V
+					getfield_a_this 32;		// reference cryptoDSE/CryptoDSE.md
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					bspush 20;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					invokevirtual 85;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 12;		// reference cryptoDSE/CryptoDSE.hashEncKey
+					sconst_0;
+					aload_2;
+					sconst_5;
+					aload_2;
+					sconst_4;
+					baload;
+					sadd;
+					bspush 20;
+					ssub;
+					bspush 20;
+					invokestatic 86;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifeq L13;
+				L12:	sspush 2800;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L13:	getfield_a_this 8;		// reference cryptoDSE/CryptoDSE.desKey
+					getfield_a_this 10;		// reference cryptoDSE/CryptoDSE.encKey
+					bspush 16;
+					invokeinterface 3 55 4;		// javacard/security/AESKey
+					getfield_a_this 15;		// reference cryptoDSE/CryptoDSE.macKey
+					getfield_a_this 11;		// reference cryptoDSE/CryptoDSE.macH
+					sconst_4;
+					invokeinterface 3 55 4;		// javacard/security/AESKey
+					getfield_a_this 13;		// reference cryptoDSE/CryptoDSE.cipher
+					getfield_a_this 8;		// reference cryptoDSE/CryptoDSE.desKey
+					sconst_1;
+					aload_2;
+					sconst_5;
+					aload_2;
+					sconst_4;
+					baload;
+					sadd;
+					bspush 36;
+					ssub;
+					bspush 16;
+					invokevirtual 100;		// init(Ljavacard/security/Key;B[BSS)V
+					getfield_a_this 14;		// reference cryptoDSE/CryptoDSE.macSig
+					getfield_a_this 15;		// reference cryptoDSE/CryptoDSE.macKey
+					sconst_1;
+					invokevirtual 77;		// init(Ljavacard/security/Key;B)V
+					aload_0;
+					sconst_0;
+					putfield_s 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					aload_0;
+					sconst_0;
+					putfield_s 49;		// short cryptoDSE/CryptoDSE.decryptedBytesReturned
+					aload_0;
+					sconst_2;
+					putfield_b 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					return;
+				L14:	sload 5;
+					sconst_2;
+					if_scmpne L20;
+				L15:	getfield_b_this 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					sconst_2;
+					if_scmpeq L17;
+				L16:	sspush 2804;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L17:	aload_2;
+					sconst_4;
+					baload;
+					getfield_s_this 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					sadd;
+					sspush 512;
+					if_scmple L19;
+				L18:	sspush 2809;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L19:	getfield_a_this 13;		// reference cryptoDSE/CryptoDSE.cipher
+					aload_2;
+					sconst_5;
+					sload_3;
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					invokevirtual 101;		// update([BSS[BS)S
+					sstore 4;
+					getfield_a_this 14;		// reference cryptoDSE/CryptoDSE.macSig
+					aload_2;
+					sconst_5;
+					sload_3;
+					invokevirtual 102;		// update([BSS)V
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					getfield_a_this 31;		// reference cryptoDSE/CryptoDSE.decryptedData
+					getfield_s_this 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					sload 4;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					dup;
+					getfield_s 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					sload 4;
+					sadd;
+					putfield_s 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					return;
+				L20:	sload 5;
+					sconst_3;
+					if_scmpne L26;
+				L21:	getfield_b_this 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					sconst_2;
+					if_scmpeq L23;
+				L22:	sspush 2804;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L23:	aload_2;
+					sconst_4;
+					baload;
+					getfield_s_this 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					sadd;
+					sspush 512;
+					if_scmple L25;
+				L24:	sspush 2809;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L25:	getfield_a_this 13;		// reference cryptoDSE/CryptoDSE.cipher
+					aload_2;
+					sconst_5;
+					sload_3;
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					invokevirtual 103;		// doFinal([BSS[BS)S
+					sstore 4;
+					aload_0;
+					getfield_a_this 14;		// reference cryptoDSE/CryptoDSE.macSig
+					aload_2;
+					sconst_5;
+					sload_3;
+					getfield_a_this 21;		// reference cryptoDSE/CryptoDSE.macData
+					sconst_0;
+					invokevirtual 78;		// sign([BSS[BS)S
+					putfield_s 47;		// short cryptoDSE/CryptoDSE.macDataLen
+					getfield_a_this 19;		// reference cryptoDSE/CryptoDSE.temporaryData
+					sconst_0;
+					getfield_a_this 31;		// reference cryptoDSE/CryptoDSE.decryptedData
+					getfield_s_this 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					sload 4;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					dup;
+					getfield_s 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					sload 4;
+					sadd;
+					putfield_s 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					aload_0;
+					sconst_3;
+					putfield_b 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					return;
+				L26:	sload 5;
+					sconst_4;
+					if_scmpne L35;
+				L27:	getfield_b_this 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					sconst_3;
+					if_scmpeq L29;
+				L28:	sspush 2804;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L29:	sconst_0;
+					sstore 6;
+				L30:	sload 6;
+					sload_3;
+					if_scmpge L34;
+				L31:	getfield_a_this 21;		// reference cryptoDSE/CryptoDSE.macData
+					sload 6;
+					baload;
+					aload_2;
+					sconst_5;
+					sload 6;
+					sadd;
+					baload;
+					if_scmpeq L33;
+				L32:	sspush 2808;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L33:	sinc 6 1;
+					goto L30;
+				L34:	aload_0;
+					sconst_4;
+					putfield_b 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					return;
+				L35:	sload 5;
+					sconst_5;
+					if_scmpne L44;
+				L36:	getfield_b_this 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					sconst_4;
+					if_scmpeq L38;
+				L37:	sspush 2804;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L38:	getfield_s_this 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					sspush 224;
+					if_scmpgt L40;
+				L39:	getfield_s_this 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					goto L41;
+				L40:	sspush 224;
+				L41:	sstore 6;
+				L42:	aload_0;
+					dup;
+					getfield_s 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					sload 6;
+					ssub;
+					putfield_s 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					getfield_a_this 31;		// reference cryptoDSE/CryptoDSE.decryptedData
+					getfield_s_this 49;		// short cryptoDSE/CryptoDSE.decryptedBytesReturned
+					aload_2;
+					sconst_0;
+					sload 6;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					dup;
+					getfield_s 49;		// short cryptoDSE/CryptoDSE.decryptedBytesReturned
+					sload 6;
+					sadd;
+					putfield_s 49;		// short cryptoDSE/CryptoDSE.decryptedBytesReturned
+					aload_1;
+					invokevirtual 72;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 6;
+					invokevirtual 73;		// setOutgoingLength(S)V
+					aload_1;
+					aload_2;
+					sconst_0;
+					sload 6;
+					invokevirtual 74;		// sendBytesLong([BSS)V
+					getfield_s_this 48;		// short cryptoDSE/CryptoDSE.sizeDecryptedData
+					ifgt L44;
+				L43:	aload_0;
+					sconst_1;
+					putfield_b 2;		// byte cryptoDSE/CryptoDSE.stateDecryption
+					sconst_1;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L44:	return;
+		}
+
+		.method private compareByteArrays([B[B)Z {
+			.stack 3;
+			.locals 1;
+
+				L0:	sconst_0;
+					sstore_3;
+				L1:	sload_3;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					if_scmpge L7;
+				L2:	aload_1;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					if_scmple L4;
+				L3:	sconst_1;
+					sreturn;
+				L4:	aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					aload_1;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					if_scmple L6;
+				L5:	sconst_0;
+					sreturn;
+				L6:	sinc 3 1;
+					goto L1;
+				L7:	sconst_1;
+					sreturn;
+		}
+
+		.method private sumByteArrays([B[B)V {
+			.stack 4;
+			.locals 4;
+
+				L0:	sconst_0;
+					sstore 5;
+				L1:	getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_1;
+					ssub;
+					sstore 6;
+				L2:	sload 6;
+					iflt L9;
+				L3:	aload_1;
+					sload 6;
+					baload;
+					sspush 255;
+					sand;
+					sstore_3;
+				L4:	aload_2;
+					sload 6;
+					baload;
+					sspush 255;
+					sand;
+					sstore 4;
+				L5:	getfield_a_this 40;		// reference cryptoDSE/CryptoDSE.shortArray
+					sconst_0;
+					sload_3;
+					sload 4;
+					sadd;
+					sload 5;
+					sadd;
+					invokestatic 107;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					getfield_a_this 33;		// reference cryptoDSE/CryptoDSE.sumResult
+					sload 6;
+					getfield_a_this 40;		// reference cryptoDSE/CryptoDSE.shortArray
+					sconst_1;
+					baload;
+					bastore;
+					getfield_a_this 40;		// reference cryptoDSE/CryptoDSE.shortArray
+					sconst_0;
+					baload;
+					ifeq L7;
+				L6:	sconst_1;
+					sstore 5;
+					goto L8;
+				L7:	sconst_0;
+					sstore 5;
+				L8:	sinc 6 -1;
+					goto L2;
+				L9:	return;
+		}
+
+		.method private sumModByteArrays([B[B)[B {
+			.stack 5;
+			.locals 1;
+
+				L0:	aload_0;
+					aload_1;
+					aload_2;
+					invokespecial 108;		// cryptoDSE/CryptoDSE.sumByteArrays([B[B)V
+					getfield_a_this 33;		// reference cryptoDSE/CryptoDSE.sumResult
+					sconst_0;
+					getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					getfield_a_this 38;		// reference cryptoDSE/CryptoDSE.modulus
+					invokespecial 109;		// cryptoDSE/CryptoDSE.compareByteArrays([B[B)Z
+					ifeq L2;
+				L1:	aload_0;
+					getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					getfield_a_this 39;		// reference cryptoDSE/CryptoDSE.minusModulus
+					invokespecial 108;		// cryptoDSE/CryptoDSE.sumByteArrays([B[B)V
+					getfield_a_this 33;		// reference cryptoDSE/CryptoDSE.sumResult
+					sconst_0;
+					getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+				L2:	getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					areturn;
+		}
+
+		.method private setModulus([BS)V {
+			.stack 5;
+			.locals 1;
+
+				L0:	aload_1;
+					sconst_0;
+					getfield_a_this 38;		// reference cryptoDSE/CryptoDSE.modulus
+					sconst_0;
+					sload_2;
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					sload_2;
+					putfield_s 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_0;
+					sstore_3;
+				L1:	sload_3;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					if_scmpge L3;
+				L2:	getfield_a_this 39;		// reference cryptoDSE/CryptoDSE.minusModulus
+					sload_3;
+					getfield_a_this 38;		// reference cryptoDSE/CryptoDSE.modulus
+					sload_3;
+					baload;
+					sspush 255;
+					sxor;
+					s2b;
+					bastore;
+					sinc 3 1;
+					goto L1;
+				L3:	getfield_a_this 36;		// reference cryptoDSE/CryptoDSE.one
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_1;
+					ssub;
+					sconst_0;
+					invokestatic 110;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 36;		// reference cryptoDSE/CryptoDSE.one
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_1;
+					ssub;
+					sconst_1;
+					bastore;
+					aload_0;
+					getfield_a_this 39;		// reference cryptoDSE/CryptoDSE.minusModulus
+					getfield_a_this 36;		// reference cryptoDSE/CryptoDSE.one
+					invokespecial 108;		// cryptoDSE/CryptoDSE.sumByteArrays([B[B)V
+					getfield_a_this 33;		// reference cryptoDSE/CryptoDSE.sumResult
+					sconst_0;
+					getfield_a_this 39;		// reference cryptoDSE/CryptoDSE.minusModulus
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method private multiplyModByteArrays([B[B)[B {
+			.stack 5;
+			.locals 10;
+
+				L0:	aload_1;
+					sconst_0;
+					getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 35;		// reference cryptoDSE/CryptoDSE.multiplyModResult
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_0;
+					invokestatic 110;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					bspush 8;
+					smul;
+					sstore 12;
+				L1:	sconst_0;
+					sstore 5;
+				L2:	sload 5;
+					sload 12;
+					if_scmpge_w L21;
+				L3:	getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sload 5;
+					bspush 8;
+					sdiv;
+					ssub;
+					sconst_1;
+					ssub;
+					sstore 7;
+				L4:	sload 5;
+					bspush 8;
+					srem;
+					sstore 8;
+				L5:	aload_2;
+					sload 7;
+					baload;
+					sconst_1;
+					sload 8;
+					sshl;
+					sand;
+					ifeq L7;
+				L6:	sconst_1;
+					goto L8;
+				L7:	sconst_0;
+				L8:	sstore_3;
+				L9:	sload_3;
+					ifeq L13;
+				L10:	aload_0;
+					getfield_a_this 35;		// reference cryptoDSE/CryptoDSE.multiplyModResult
+					getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					invokespecial 108;		// cryptoDSE/CryptoDSE.sumByteArrays([B[B)V
+					getfield_a_this 33;		// reference cryptoDSE/CryptoDSE.sumResult
+					sconst_0;
+					getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					getfield_a_this 38;		// reference cryptoDSE/CryptoDSE.modulus
+					invokespecial 109;		// cryptoDSE/CryptoDSE.compareByteArrays([B[B)Z
+					ifeq L12;
+				L11:	aload_0;
+					getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					getfield_a_this 39;		// reference cryptoDSE/CryptoDSE.minusModulus
+					invokespecial 108;		// cryptoDSE/CryptoDSE.sumByteArrays([B[B)V
+					getfield_a_this 33;		// reference cryptoDSE/CryptoDSE.sumResult
+					sconst_0;
+					getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+				L12:	getfield_a_this 34;		// reference cryptoDSE/CryptoDSE.sumModResult
+					sconst_0;
+					getfield_a_this 35;		// reference cryptoDSE/CryptoDSE.multiplyModResult
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+				L13:	getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_1;
+					ssub;
+					baload;
+					sstore 11;
+				L14:	getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_1;
+					ssub;
+					getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_1;
+					ssub;
+					baload;
+					sspush 255;
+					sand;
+					sconst_1;
+					sshl;
+					s2b;
+					bastore;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					sconst_2;
+					ssub;
+					sstore 6;
+				L15:	sload 6;
+					iflt L18;
+				L16:	getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					sload 6;
+					baload;
+					sstore 4;
+				L17:	getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					sload 6;
+					getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					sload 6;
+					baload;
+					sspush 255;
+					sand;
+					sconst_1;
+					sshl;
+					sload 11;
+					sspush 255;
+					sand;
+					bspush 7;
+					sshr;
+					sor;
+					s2b;
+					bastore;
+					sload 4;
+					sstore 11;
+					sinc 6 -1;
+					goto L15;
+				L18:	aload_0;
+					getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					getfield_a_this 38;		// reference cryptoDSE/CryptoDSE.modulus
+					invokespecial 109;		// cryptoDSE/CryptoDSE.compareByteArrays([B[B)Z
+					ifeq L20;
+				L19:	aload_0;
+					getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					getfield_a_this 39;		// reference cryptoDSE/CryptoDSE.minusModulus
+					invokespecial 108;		// cryptoDSE/CryptoDSE.sumByteArrays([B[B)V
+					getfield_a_this 33;		// reference cryptoDSE/CryptoDSE.sumResult
+					sconst_0;
+					getfield_a_this 37;		// reference cryptoDSE/CryptoDSE.shift
+					sconst_0;
+					getfield_s_this 45;		// short cryptoDSE/CryptoDSE.sizeModulus
+					invokestatic 79;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+				L20:	sinc 5 1;
+					goto_w L2;
+				L21:	getfield_a_this 35;		// reference cryptoDSE/CryptoDSE.multiplyModResult
+					areturn;
+		}
+
+	}
+
+	.class public InstanceKeys 1 extends 3.0 {		// extends java/lang/Object
+
+		.fields {
+			 2.18 privKey 0;		// Ljavacard/security/ECPrivateKey;
+			 2.19 pubKey 1;		// Ljavacard/security/ECPublicKey;
+			 short id 2;		// S
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			getPublicKey()Ljavacard/security/ECPublicKey;;
+			getPrivateKey()Ljavacard/security/ECPrivateKey;;
+			getKeySize()S;
+			getId()S;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method protected <init>(S)V 0 {
+			.stack 4;
+			.locals 2;
+
+				L0:	aload_0;
+					invokespecial 111;		// java/lang/Object.<init>()V
+					sspush -32512;
+					sstore_3;
+				L1:	new 87;		// javacard/security/KeyPair
+					dup;
+					sconst_5;
+					sload_3;
+					invokespecial 95;		// javacard/security/KeyPair.<init>(BS)V
+					astore_2;
+				L2:	aload_2;
+					invokevirtual 115;		// genKeyPair()V
+					aload_0;
+					aload_2;
+					invokevirtual 56;		// getPublic()Ljavacard/security/PublicKey;
+					checkcast 0 58;		// T_CLASSORINTERFACE javacard/security/ECPublicKey
+					putfield_a 50;		// reference cryptoDSE/InstanceKeys.pubKey
+					aload_0;
+					aload_2;
+					invokevirtual 88;		// getPrivate()Ljavacard/security/PrivateKey;
+					checkcast 0 89;		// T_CLASSORINTERFACE javacard/security/ECPrivateKey
+					putfield_a 51;		// reference cryptoDSE/InstanceKeys.privKey
+					aload_0;
+					sload_1;
+					putfield_s 52;		// short cryptoDSE/InstanceKeys.id
+					return;
+		}
+
+		.method public getPublicKey()Ljavacard/security/ECPublicKey; 1 {
+			.stack 1;
+			.locals 0;
+
+			.descriptor	Ljavacard/security/ECPublicKey;	2.19;
+
+				L0:	getfield_a_this 50;		// reference cryptoDSE/InstanceKeys.pubKey
+					areturn;
+		}
+
+		.method public getPrivateKey()Ljavacard/security/ECPrivateKey; 2 {
+			.stack 1;
+			.locals 0;
+
+			.descriptor	Ljavacard/security/ECPrivateKey;	2.18;
+
+				L0:	getfield_a_this 51;		// reference cryptoDSE/InstanceKeys.privKey
+					areturn;
+		}
+
+		.method public getKeySize()S 3 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 50;		// reference cryptoDSE/InstanceKeys.pubKey
+					invokeinterface 1 58 1;		// javacard/security/ECPublicKey
+					sreturn;
+		}
+
+		.method public getId()S 4 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_s_this 52;		// short cryptoDSE/InstanceKeys.id
+					sreturn;
+		}
+
+	}
+
+	.class public ListInstances 2 extends 3.0 {		// extends java/lang/Object
+
+		.fields {
+			 InstanceKeys[] clients 0;		// [LcryptoDSE/InstanceKeys;
+			 byte[] available 1;		// [B
+			static final short MAXINSTANCES = 512;		// S
+			static final short MAX_INSTANCES_REACHED = 2800;		// S
+			static final short INVALID_INSTANCE_ID = 2801;		// S
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			consumeNextInstance()S;
+			createInstance()S;
+			removeInstance(S)V;
+			getInstance(S)LcryptoDSE/InstanceKeys;;
+			isValid(S)Z;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method protected <init>()V 0 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 111;		// java/lang/Object.<init>()V
+					aload_0;
+					bspush 64;
+					newarray 11;
+					putfield_a 53;		// reference cryptoDSE/ListInstances.available
+					aload_0;
+					sspush 512;
+					anewarray 116;		// cryptoDSE/InstanceKeys
+					putfield_a 54;		// reference cryptoDSE/ListInstances.clients
+					return;
+		}
+
+		.method public consumeNextInstance()S 1 {
+			.stack 4;
+			.locals 4;
+
+				L0:	sconst_0;
+					sstore_1;
+				L1:	sconst_0;
+					sstore_2;
+				L2:	sconst_0;
+					sstore_3;
+				L3:	sload_3;
+					ifne L16;
+				L4:	sload_1;
+					bspush 64;
+					if_scmpge L16;
+				L5:	sspush 128;
+					sstore 4;
+				L6:	sconst_0;
+					sstore_2;
+				L7:	sload_3;
+					ifne L13;
+				L8:	sload_2;
+					bspush 8;
+					if_scmpge L13;
+				L9:	getfield_a_this 53;		// reference cryptoDSE/ListInstances.available
+					sload_1;
+					baload;
+					sload 4;
+					sand;
+					ifne L11;
+				L10:	sconst_1;
+					sstore_3;
+					getfield_a_this 53;		// reference cryptoDSE/ListInstances.available
+					sload_1;
+					getfield_a_this 53;		// reference cryptoDSE/ListInstances.available
+					sload_1;
+					baload;
+					sload 4;
+					sxor;
+					s2b;
+					bastore;
+					goto L12;
+				L11:	sinc 2 1;
+				L12:	sload 4;
+					sconst_1;
+					sshr;
+					s2b;
+					sstore 4;
+					goto L7;
+				L13:	sload_3;
+					ifne L15;
+				L14:	sinc 1 1;
+				L15:	goto L3;
+				L16:	sload_3;
+					ifne L18;
+				L17:	sspush 2800;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L18:	sload_1;
+					bspush 8;
+					smul;
+					sload_2;
+					sadd;
+					sreturn;
+		}
+
+		.method public createInstance()S 2 {
+			.stack 5;
+			.locals 1;
+
+				L0:	aload_0;
+					invokevirtual 118;		// consumeNextInstance()S
+					sstore_1;
+				L1:	getfield_a_this 54;		// reference cryptoDSE/ListInstances.clients
+					sload_1;
+					new 116;		// cryptoDSE/InstanceKeys
+					dup;
+					sload_1;
+					invokespecial 119;		// cryptoDSE/InstanceKeys.<init>(S)V
+					aastore;
+					sload_1;
+					sreturn;
+		}
+
+		.method public removeInstance(S)V 3 {
+			.stack 4;
+			.locals 3;
+
+				L0:	sload_1;
+					iflt L2;
+				L1:	sload_1;
+					sspush 512;
+					if_scmplt L3;
+				L2:	sspush 2801;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L3:	getfield_a_this 54;		// reference cryptoDSE/ListInstances.clients
+					sload_1;
+					aaload;
+					ifnonnull L5;
+				L4:	sspush 2801;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L5:	sload_1;
+					bspush 8;
+					sdiv;
+					sstore_2;
+				L6:	sload_1;
+					bspush 8;
+					srem;
+					sstore_3;
+				L7:	sspush 128;
+					sload_3;
+					sshr;
+					sstore 4;
+				L8:	getfield_a_this 53;		// reference cryptoDSE/ListInstances.available
+					sload_2;
+					getfield_a_this 53;		// reference cryptoDSE/ListInstances.available
+					sload_2;
+					baload;
+					sload 4;
+					sxor;
+					s2b;
+					bastore;
+					getfield_a_this 54;		// reference cryptoDSE/ListInstances.clients
+					sload_1;
+					aconst_null;
+					aastore;
+					return;
+		}
+
+		.method public getInstance(S)LcryptoDSE/InstanceKeys; 4 {
+			.stack 2;
+			.locals 0;
+
+				L0:	sload_1;
+					iflt L2;
+				L1:	sload_1;
+					sspush 512;
+					if_scmplt L3;
+				L2:	sspush 2801;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L3:	getfield_a_this 54;		// reference cryptoDSE/ListInstances.clients
+					sload_1;
+					aaload;
+					ifnonnull L5;
+				L4:	sspush 2801;
+					invokestatic 63;		// javacard/framework/ISOException.throwIt(S)V
+				L5:	getfield_a_this 54;		// reference cryptoDSE/ListInstances.clients
+					sload_1;
+					aaload;
+					areturn;
+		}
+
+		.method public isValid(S)Z 5 {
+			.stack 2;
+			.locals 0;
+
+				L0:	sload_1;
+					iflt L2;
+				L1:	sload_1;
+					sspush 512;
+					if_scmplt L3;
+				L2:	sconst_0;
+					sreturn;
+				L3:	getfield_a_this 54;		// reference cryptoDSE/ListInstances.clients
+					sload_1;
+					aaload;
+					ifnonnull L5;
+				L4:	sconst_0;
+					sreturn;
+				L5:	sconst_1;
+					sreturn;
+		}
+
+	}
+
+}
